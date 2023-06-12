@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
+import React from "react";
 import {
   BrowserRouter,
   Routes,
@@ -7,8 +8,8 @@ import {
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import PageTwo from "./pages/PageTwo";
-import { Chart } from "chart.js";
-import axios from "axios";
+// import { Chart } from "chart.js";
+// import axios from "axios";
 
 function App() {
   

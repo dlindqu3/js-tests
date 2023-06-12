@@ -2,45 +2,44 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function Home() {
+  const [userData, setUserData] = useState(); 
+  const [usersData, setUsersData] = useState(); 
 
-    const [storeData, setStoreData] = useState();
-    const [storeDataAll, setStoreDataAll] = useState();  
-  
-    // let getStoreDataAll = async () => {
-    //   let url = "https://fakestoreapi.com/products/"
-    //   let res = await axios.get(url); 
-    //   console.log("res: ", res); 
-    //   if (res.data.category){
-    //     setStoreDataAll(res); 
-    //   }
-    // }
-  
-    useEffect(() => {
-      let getStoreData = async () => {
-        let url = "https://fakestoreapi.com/products/1";
-        let res = await axios.get(url); 
-        setStoreData(res);
-      } 
-      getStoreData(); 
-    })
+  useEffect(() => {
+    let getJsonPlaceholderData = async () => {
+      let url = "https://jsonplaceholder.typicode.com/users/1";
+      let res = await axios.get(url);
+      console.log("res from useEffect: ", res); 
+      setUserData(res);
+    };
+    getJsonPlaceholderData();
+  }, []);
 
-    let getAllStoreData = async () => {
-        let url = "https://fakestoreapi.com/products/";
-        let res = await axios.get(url); 
-        console.log(res); 
-        setStoreDataAll(res); 
-    }
+  let getAllJsonPlaceholderUsersData = async () => {
+    let url = "https://jsonplaceholder.typicode.com/users";
+    let res = await axios.get(url);
+    console.log(res);
+    setUsersData(res);
+  };
 
   return (
     <div>
-        <p>hello</p>
-        <h1 data-testid="food">Pizza</h1>
-        {/* <button onClick={() => {console.log("button clicked")}}>GetStoreData</button> */}
-        { storeData && <p data-testid="product-title">{ storeData.data.title }</p> }
-        <button onClick={() => {getAllStoreData()}}>GetAllStoreData</button>
-        { storeDataAll && <p data-testid="product2-title">{ storeDataAll["data"][1]["title"] }</p> }
+      <p>hello</p>
+      <h1 data-testid="food">Pizza</h1>
+      {userData && <p data-testid="user-name">{userData.data.name}</p>}
+      
+      <button
+        onClick={() => {
+          getAllJsonPlaceholderUsersData();
+        }}
+      >
+        getUsers
+      </button>
+      {usersData && (
+        <p data-testid="user2-name">{usersData["data"][1]["name"]}</p>
+      )}
     </div>
-  )
+  );
 }
 
 export default Home
